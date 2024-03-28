@@ -30,6 +30,9 @@ class MainActivity : ComponentActivity() {
                     AppText("A new push to dev",
                         modifier = Modifier.fillMaxWidth()
                     )
+                    AppText("A new push to dev",
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
             }
         }
