@@ -4,10 +4,9 @@
 ##unit test: Runs unit test
 name: CI
 on:
-  pull_request:
-    branches: [master]
   push:
     branches: [dev]
+
 jobs:
   lint:
     name: Code linting
