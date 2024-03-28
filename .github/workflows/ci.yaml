@@ -44,6 +44,9 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3
 
+      - name: Grant execution permission for Gradle
+        run: chmod +x ./gradlew
+
       - name: Run tests
         run: ./gradlew test
 
