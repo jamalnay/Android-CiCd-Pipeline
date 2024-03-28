@@ -1,12 +1,12 @@
 # Android CI/CD pipline:
 
-This pipeline orchestrates the continuous integration (CI) and continuous deployment (CD) processes for an Android application using GitHub Actions and Firebase App Distribution. It automates the linting, testing, when changes are pushed to the **dev** branch, in addition to building and distribution of the Android app whenever a **pull request** is opened.
+This pipeline orchestrates continuous integration (CI) and continuous deployment (CD) processes for an Android application using GitHub Actions and Firebase App Distribution. It automates code linting and unit testing, when changes are pushed to the **dev** branch, in addition to building and distribution of the Android app whenever a **pull request** is made to the **master** branch.
 
 ## Jobs
 
 ### Lint
 
-This job is responsible for running code quality checks.
+This job is responsible for running code linting and obtain lint report link.
 
 #### Triggers
 
@@ -58,7 +58,7 @@ This job is responsible for running code quality checks.
 
 ### test
 
-This job is responsible for running tests and checks on the Android app.
+This job is responsible for running unit tests on the Android app.
 
 #### Triggers
 
@@ -114,11 +114,11 @@ This job is responsible for running tests and checks on the Android app.
 
 # Continuous Deployment (CD) Workflow
 
-This workflow ensures continuous deployment by triggering the deploy job whenever a pull request to master `master` branch is made.
+This workflow ensures continuous deployment by triggering the deploy job whenever a pull request to `master` branch is made.
 
 ### deploy
 
-This job mirrors the deploy job in the Continuous Delivery workflow.
+This job will build a debug version of the Android app and deliver it to Firebase App Distribution.
 
 #### Triggers
 
