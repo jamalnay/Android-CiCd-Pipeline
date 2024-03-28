@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -27,10 +28,12 @@ class MainActivity : ComponentActivity() {
                         "Firebase App Distribution CI/CD with github actions",
                         modifier = Modifier.fillMaxWidth()
                     )
+                    Divider()
                     AppText("A new push to dev",
                         modifier = Modifier.fillMaxWidth()
                     )
-                    AppText("A new push to dev",
+                    Divider()
+                    AppText("PR merged",
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
