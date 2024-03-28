@@ -1,8 +1,7 @@
 #Continues Delivery workflow
 #Jobs:
-##deploy: build app artifect and upload it to firebase
+##deploy: build app artifact and upload it to firebase
 name: CD
-
 on:
   pull_request:
     branches: [master]
@@ -26,8 +25,8 @@ jobs:
       - name: Grant execution permission for Gradle
         run: chmod +x ./gradlew
 
-      - name: build release
-        run: ./gradlew assembleRelease
+      - name: build debug
+        run: ./gradlew assembleDebug
 
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
