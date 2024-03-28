@@ -1,6 +1,8 @@
 #Continues Integration workflow
-#lint: Scan the code for errors
-#unit test: Runs unit test
+#Jobs:
+##setup: Setup Java 17 and Gradle & grant execution permission for Gradle
+##lint: Scan the code for errors
+##unit test: Runs unit test
 name: CI
 on:
   pull_request:
@@ -8,23 +10,28 @@ on:
   push:
     branches: [dev]
 jobs:
+  setup:
+    name: Java and gradle setup
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Java JDK 17
+      uses: actions/setup-java@v1
+      with:
+        java-version: '17'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    - name: Grant execution permission for Gradle
+      run: chmod +x ./gradlew
+
   lint:
     name: Code linting
     runs-on: ubuntu-latest
+    needs: setup
     steps:
       - name: Code Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Java JDK 17
-        uses: actions/setup-java@v1
-        with:
-          java-version: '17'
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Grant execution permission for Gradle
-        run: chmod +x ./gradlew
 
       - name: Run lint
         run: ./gradlew lintDebug
@@ -38,19 +45,11 @@ jobs:
 
   unit-test:
     name: Perform Unit Testing
-    needs: [lint]
+    needs: [setup,lint]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v3
-
-      - name: Set up Java JDK 17
-        uses: actions/setup-java@v1
-        with:
-          java-version: '17'
-
-      - name: Grant execution permission for Gradle
-        run: chmod +x ./gradlew
+        uses: actions/checkout@v4
 
       - name: Run tests
         run: ./gradlew test
